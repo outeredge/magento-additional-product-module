@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <preference for="Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\Related" type="OuterEdge\AdditionalProduct\Ui\DataProvider\Product\Form\Modifier\Related" />
+    <preference for="Magento\Catalog\Ui\DataProvider\Product\Related\AdditionalDataProvider" type="OuterEdge\AdditionalProduct\Ui\DataProvider\Product\Related\AdditionalDataProvider" />
+    <preference for="Magento\Catalog\Model\Product\Link" type="OuterEdge\AdditionalProduct\Model\Product\Link" />
+    <preference for="Magento\Catalog\Controller\Adminhtml\Product\Initialization\Helper" type="OuterEdge\AdditionalProduct\Controller\Adminhtml\Product\Initialization\Helper" />
+</config>
