@@ -33,7 +33,7 @@ class Helper extends \Magento\Catalog\Controller\Adminhtml\Product\Initializatio
             'related' => $product->getRelatedReadonly(),
             'upsell' => $product->getUpsellReadonly(),
             'crosssell' => $product->getCrosssellReadonly(),
-            'additional' => $product->getRelatedReadonly(),
+            'additional' => $product->getAdditionalReadonly(),
         ];
 
         foreach ($linkTypes as $linkType => $readonly) {

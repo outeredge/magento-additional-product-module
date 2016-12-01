@@ -4,7 +4,7 @@
     <preference for="Magento\Catalog\Ui\DataProvider\Product\Related\AdditionalDataProvider" type="OuterEdge\AdditionalProduct\Ui\DataProvider\Product\Related\AdditionalDataProvider" />
     <preference for="Magento\Catalog\Model\Product\Link" type="OuterEdge\AdditionalProduct\Model\Product\Link" />
     <preference for="Magento\Catalog\Model\Product\CopyConstructor\Additional" type="OuterEdge\AdditionalProduct\Model\Product\CopyConstructor\Additional" />
-    <preference for="Magento\Catalog\Model\Product\Product" type="OuterEdge\AdditionalProduct\Model\Product\Product" />
+    <preference for="Magento\Catalog\Model\Product" type="OuterEdge\AdditionalProduct\Model\Product" />
     <preference for="Magento\Catalog\Model\ProductLink\CollectionProvider\Additional" type="OuterEdge\AdditionalProduct\Model\ProductLink\CollectionProvider\Additional" />
     <preference for="Magento\Catalog\Controller\Adminhtml\Product\Initialization\Helper" type="OuterEdge\AdditionalProduct\Controller\Adminhtml\Product\Initialization\Helper" />
     <preference for="Magento\Catalog\Controller\Adminhtml\Product\Additional" type="OuterEdge\AdditionalProduct\Controller\Adminhtml\Product\Additional" />
