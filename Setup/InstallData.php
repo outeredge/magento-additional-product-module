@@ -50,7 +50,23 @@ class InstallData implements InstallDataInterface
             ];
 
             $setup->getConnection()->insertMultiple($setup->getTable('catalog_product_link_type'), $data);
+
+            /**
+            * install product link attributes
+            */
+            $data = [
+                [
+                   'link_type_id' => \OuterEdge\AdditionalProduct\Model\Product\Link::LINK_TYPE_ADDITIONAL,
+                   'product_link_attribute_code' => 'position',
+                   'data_type' => 'int',
+                ],
+            ];
+
+            $setup->getConnection()
+                ->insertMultiple($setup->getTable('catalog_product_link_attribute'), $data);
         }
     }
-
 }
+
+
+

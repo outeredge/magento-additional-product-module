@@ -1,9 +1,21 @@
 <?php
 namespace OuterEdge\AdditionalProduct\Ui\DataProvider\Product\Form\Modifier;
 
+use Magento\Ui\Component\Form\Fieldset;
+
 class Related extends \Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\Related
 {
     const DATA_SCOPE_ADDITIONAL = 'additional';
+
+    /**
+     * @var string
+     */
+    private static $previousGroup = 'search-engine-optimization';
+
+    /**
+     * @var int
+     */
+    private static $sortOrder = 90;
 
     /**
      * {@inheritdoc}
@@ -66,7 +78,7 @@ class Related extends \Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\Rel
      */
     protected function getAdditionalFieldset()
     {
-          $content = __(
+        $content = __(
             'Additional products are shown to customers in addition to the item the customer is looking at.'
         );
 

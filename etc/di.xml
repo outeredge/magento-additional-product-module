@@ -3,5 +3,34 @@
     <preference for="Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\Related" type="OuterEdge\AdditionalProduct\Ui\DataProvider\Product\Form\Modifier\Related" />
     <preference for="Magento\Catalog\Ui\DataProvider\Product\Related\AdditionalDataProvider" type="OuterEdge\AdditionalProduct\Ui\DataProvider\Product\Related\AdditionalDataProvider" />
     <preference for="Magento\Catalog\Model\Product\Link" type="OuterEdge\AdditionalProduct\Model\Product\Link" />
+    <preference for="Magento\Catalog\Model\Product\CopyConstructor\Additional" type="OuterEdge\AdditionalProduct\Model\Product\CopyConstructor\Additional" />
+    <preference for="Magento\Catalog\Model\Product\Product" type="OuterEdge\AdditionalProduct\Model\Product\Product" />
+    <preference for="Magento\Catalog\Model\ProductLink\CollectionProvider\Additional" type="OuterEdge\AdditionalProduct\Model\ProductLink\CollectionProvider\Additional" />
     <preference for="Magento\Catalog\Controller\Adminhtml\Product\Initialization\Helper" type="OuterEdge\AdditionalProduct\Controller\Adminhtml\Product\Initialization\Helper" />
+    <preference for="Magento\Catalog\Controller\Adminhtml\Product\Additional" type="OuterEdge\AdditionalProduct\Controller\Adminhtml\Product\Additional" />
+    <preference for="Magento\Catalog\Controller\Adminhtml\Product\AdditionalGrid" type="OuterEdge\AdditionalProduct\Controller\Adminhtml\Product\AdditionalGrid" />
+    <preference for="Magento\Catalog\Block\Adminhtml\Product\Edit\Tab\Additional" type="OuterEdge\AdditionalProduct\Block\Adminhtml\Product\Edit\Tab\Additional" />
+    <preference for="Magento\Catalog\Block\Adminhtml\Product\Edit\Tabs" type="OuterEdge\AdditionalProduct\Block\Adminhtml\Product\Edit\Tabs" />
+    <preference for="Magento\Catalog\Block\Product\ProductList\Additional" type="OuterEdge\AdditionalProduct\Block\Product\ProductList\Additional" />
+
+    <type name="Magento\Catalog\Model\Product\LinkTypeProvider">
+        <arguments>
+            <argument name="linkTypes" xsi:type="array">
+                <item name="related" xsi:type="const">Magento\Catalog\Model\Product\Link::LINK_TYPE_RELATED</item>
+                <item name="crosssell" xsi:type="const">Magento\Catalog\Model\Product\Link::LINK_TYPE_CROSSSELL</item>
+                <item name="upsell" xsi:type="const">Magento\Catalog\Model\Product\Link::LINK_TYPE_UPSELL</item>
+                <item name="additional" xsi:type="const">OuterEdge\AdditionalProduct\Model\Product\Link::LINK_TYPE_ADDITIONAL</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Catalog\Model\ProductLink\CollectionProvider">
+        <arguments>
+            <argument name="providers" xsi:type="array">
+                <item name="crosssell" xsi:type="object">Magento\Catalog\Model\ProductLink\CollectionProvider\Crosssell</item>
+                <item name="upsell" xsi:type="object">Magento\Catalog\Model\ProductLink\CollectionProvider\Upsell</item>
+                <item name="related" xsi:type="object">Magento\Catalog\Model\ProductLink\CollectionProvider\Related</item>
+                <item name="additional" xsi:type="object">OuterEdge\AdditionalProduct\Model\ProductLink\CollectionProvider\Additional</item>
+            </argument>
+        </arguments>
+    </type>
 </config>
