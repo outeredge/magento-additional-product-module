@@ -13,6 +13,11 @@
     <preference for="Magento\Catalog\Block\Adminhtml\Product\Edit\Tabs" type="OuterEdge\AdditionalProduct\Block\Adminhtml\Product\Edit\Tabs" />
     <preference for="Magento\Catalog\Block\Product\ProductList\Additional" type="OuterEdge\AdditionalProduct\Block\Product\ProductList\Additional" />
 
+    <type name="Magento\Catalog\Model\Product">
+        <arguments>
+            <argument name="productLink" xsi:type="object">OuterEdge\AdditionalProduct\Model\Product\Link\Proxy</argument>
+        </arguments>
+    </type>
     <type name="Magento\Catalog\Model\Product\LinkTypeProvider">
         <arguments>
             <argument name="linkTypes" xsi:type="array">
