@@ -6,7 +6,6 @@ class AddPlugin {
 
     public function aroundAddProductsByIds(\Magento\Checkout\Model\Cart $subject, callable $proceed, $productIds)
     {
-        $allAdded = true;
         if (!empty($productIds)) {
             foreach ($productIds as $key => $productId) {
 
@@ -19,6 +18,7 @@ class AddPlugin {
                 if ($product->getTypeId() === 'bundle') {
 
                     $_objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+
                     $options = $_objectManager->get('Magento\Bundle\Model\Option')
                         ->getResourceCollection()
                         ->setProductIdFilter($product->getId())
@@ -37,7 +37,8 @@ class AddPlugin {
                         try {
                             $subject->addProduct($product, $params);
                         } catch (\Exception $e) {
-                            $allAdded = false;
+                            $messageManager = $_objectManager->get('Magento\Framework\Message\ManagerInterface');
+                            $messageManager->addError(__("We don't have as many of some products as you want."));
                         }
                     }
                 }
