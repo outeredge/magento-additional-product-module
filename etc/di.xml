@@ -18,6 +18,11 @@
             <argument name="productLink" xsi:type="object">OuterEdge\AdditionalProduct\Model\Product\Link\Proxy</argument>
         </arguments>
     </type>
+
+    <type name="Magento\Checkout\Model\Cart">
+        <plugin name="addPlugin" type="OuterEdge\AdditionalProduct\Plugin\AddPlugin" sortOrder="1"/>
+    </type>
+
     <type name="Magento\Catalog\Model\Product\LinkTypeProvider">
         <arguments>
             <argument name="linkTypes" xsi:type="array">
