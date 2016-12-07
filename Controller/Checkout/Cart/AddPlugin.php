@@ -11,7 +11,7 @@ class AddPlugin {
 
         if (!empty($additional)) {
             if (!empty($related)) {
-                $additional = $related . ','.$additional;
+                $additional = $related . ','. $additional;
             }
             $subject->getRequest()->setParams(['related_product' => $additional]);
         }
