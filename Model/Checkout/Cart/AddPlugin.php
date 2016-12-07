@@ -2,7 +2,24 @@
 
 namespace OuterEdge\AdditionalProduct\Model\Checkout\Cart;
 
-class AddPlugin {
+class AddPlugin
+{
+    /**
+     * Construct
+     *
+     * @param \Magento\Catalog\Model\Product $productModel
+     * @param \Magento\Bundle\Model\Option $optionModel
+     * @param \Magento\Framework\Message\ManagerInterface $managerInterface
+     */
+    public function __construct(
+        \Magento\Catalog\Model\Product $productModel,
+        \Magento\Bundle\Model\Option $optionModel,
+        \Magento\Framework\Message\ManagerInterface $managerInterface
+    ) {
+        $this->_productModel     = $productModel;
+        $this->_optionModel      = $optionModel;
+        $this->_managerInterface = $managerInterface;
+    }
 
     public function aroundAddProductsByIds(\Magento\Checkout\Model\Cart $subject, callable $proceed, $productIds)
     {
@@ -13,20 +30,18 @@ class AddPlugin {
                 if (!$productId) {
                     continue;
                 }
-                $product = $this->getLoadProduct($productId);
+                $product = $this->_productModel->load($productId);
 
-                if ($product->getTypeId() === 'bundle') {
+                if ($product->getTypeId() === \Magento\Catalog\Model\Product\Type::TYPE_BUNDLE) {
 
-                    $_objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-
-                    $options = $_objectManager->get('Magento\Bundle\Model\Option')
+                    $options = $this->_optionModel
                         ->getResourceCollection()
                         ->setProductIdFilter($product->getId())
                         ->setPositionOrder();
                     $options->joinValues($product->getStore()->getWebsiteId());
 
-                    $typeInstance = $_objectManager->get('Magento\Bundle\Model\Product\Type');
-                    $selections = $typeInstance->getSelectionsCollection($typeInstance->getOptionsIds($product), $product);
+                    $selections = $product->getTypeInstance()->getSelectionsCollection(
+                        $product->getTypeInstance()->getOptionsIds($product), $product);
 
                     $params = [];
                     foreach ($selections as $sel) {
@@ -37,21 +52,14 @@ class AddPlugin {
                         try {
                             $subject->addProduct($product, $params);
                         } catch (\Exception $e) {
-                            $messageManager = $_objectManager->get('Magento\Framework\Message\ManagerInterface');
-                            $messageManager->addError(__("We don't have as many of some products as you want."));
+                            $this->_managerInterface->addError(__("We don't have as many of some products as you want."));
                         }
                     }
+                    unset($productIds[$key]);
                 }
             }
-            unset($productIds[$key]);
         }
 
         return $proceed($productIds);
-    }
-
-    protected function getLoadProduct($productInfo)
-    {
-        $_objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-        return $_objectManager->get('Magento\Catalog\Model\Product')->load($productInfo);
     }
 }

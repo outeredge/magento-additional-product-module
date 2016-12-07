@@ -2,8 +2,8 @@
 
 namespace OuterEdge\AdditionalProduct\Controller\Checkout\Cart;
 
-class AddPlugin {
-
+class AddPlugin
+{
     public function beforeExecute(\Magento\Checkout\Controller\Cart $subject)
     {
         $related    = $subject->getRequest()->getParam('related_product');
@@ -11,7 +11,7 @@ class AddPlugin {
 
         if (!empty($additional)) {
             if (!empty($related)) {
-                $additional = $related . ','. $additional;
+                $additional = $related . ',' . $additional;
             }
             $subject->getRequest()->setParams(['related_product' => $additional]);
         }
