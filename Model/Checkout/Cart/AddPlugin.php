@@ -1,6 +1,6 @@
 <?php
 
-namespace OuterEdge\AdditionalProduct\Plugin;
+namespace OuterEdge\AdditionalProduct\Model\Checkout\Cart;
 
 class AddPlugin {
 

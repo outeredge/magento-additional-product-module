@@ -18,9 +18,11 @@
             <argument name="productLink" xsi:type="object">OuterEdge\AdditionalProduct\Model\Product\Link\Proxy</argument>
         </arguments>
     </type>
-
     <type name="Magento\Checkout\Model\Cart">
-        <plugin name="addPlugin" type="OuterEdge\AdditionalProduct\Plugin\AddPlugin" sortOrder="1"/>
+        <plugin name="OuterEdge_AdditionalProduct::checkoutAddPlugin" type="OuterEdge\AdditionalProduct\Model\Checkout\Cart\AddPlugin" sortOrder="1"/>
+    </type>
+    <type name="Magento\Checkout\Controller\Cart\Add">
+        <plugin name="OuterEdge_AdditionalProduct::cartAddPlugin" type="OuterEdge\AdditionalProduct\Controller\Checkout\Cart\AddPlugin" sortOrder="1" />
     </type>
 
     <type name="Magento\Catalog\Model\Product\LinkTypeProvider">
