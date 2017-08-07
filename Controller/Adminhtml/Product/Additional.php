@@ -2,29 +2,35 @@
 
 namespace OuterEdge\AdditionalProduct\Controller\Adminhtml\Product;
 
-class Additional extends \Magento\Catalog\Controller\Adminhtml\Product
+use Magento\Catalog\Controller\Adminhtml\Product;
+use Magento\Framework\View\Result\LayoutFactory;
+use Magento\Backend\App\Action\Context;
+use Magento\Catalog\Controller\Adminhtml\Product\Builder;
+use Magento\Framework\View\Result\Layout;
+
+class Additional extends Product
 {
     /**
-     * @var \Magento\Framework\View\Result\LayoutFactory
+     * @var LayoutFactory
      */
     protected $resultLayoutFactory;
 
     /**
-     * @param \Magento\Backend\App\Action\Context $context
-     * @param \Magento\Catalog\Controller\Adminhtml\Product\Builder $productBuilder
-     * @param \Magento\Framework\View\Result\LayoutFactory $resultLayoutFactory
+     * @param Context $context
+     * @param Builder $productBuilder
+     * @param LayoutFactory $resultLayoutFactory
      */
     public function __construct(
-        \Magento\Backend\App\Action\Context $context,
-        \Magento\Catalog\Controller\Adminhtml\Product\Builder $productBuilder,
-        \Magento\Framework\View\Result\LayoutFactory $resultLayoutFactory
+        Context $context,
+        Builder $productBuilder,
+        LayoutFactory $resultLayoutFactory
     ) {
-        parent::__construct($context, $productBuilder);
         $this->resultLayoutFactory = $resultLayoutFactory;
+        parent::__construct($context, $productBuilder);
     }
 
     /**
-     * @return \Magento\Framework\View\Result\Layout
+     * @return Layout
      */
     public function execute()
     {

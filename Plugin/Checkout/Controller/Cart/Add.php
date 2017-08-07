@@ -1,10 +1,12 @@
 <?php
 
-namespace OuterEdge\AdditionalProduct\Controller\Checkout\Cart;
+namespace OuterEdge\AdditionalProduct\Plugin\Checkout\Controller\Cart;
 
-class AddPlugin
+use Magento\Checkout\Controller\Cart\Add as CartAdd;
+
+class Add
 {
-    public function beforeExecute(\Magento\Checkout\Controller\Cart $subject)
+    public function beforeExecute(CartAdd $subject)
     {
         $related    = $subject->getRequest()->getParam('related_product');
         $additional = $subject->getRequest()->getParam('additional_product');

@@ -1,39 +1,42 @@
 <?php
 
-namespace OuterEdge\AdditionalProduct\Model\Checkout\Cart;
+namespace OuterEdge\AdditionalProduct\Plugin\Checkout\Model;
 
-class AddPlugin
+use Magento\Checkout\Model\Cart as MagentoCart;
+use Magento\Catalog\Model\Product;
+use Magento\Bundle\Model\Option;
+use Magento\Framework\Message\ManagerInterface;
+use Magento\Catalog\Model\Product\Type;
+use Exception;
+
+class Cart
 {
     /**
-     * Construct
-     *
-     * @param \Magento\Catalog\Model\Product $productModel
-     * @param \Magento\Bundle\Model\Option $optionModel
-     * @param \Magento\Framework\Message\ManagerInterface $managerInterface
+     * @param Product $productModel
+     * @param Option $optionModel
+     * @param ManagerInterface $managerInterface
      */
     public function __construct(
-        \Magento\Catalog\Model\Product $productModel,
-        \Magento\Bundle\Model\Option $optionModel,
-        \Magento\Framework\Message\ManagerInterface $managerInterface
+        Product $productModel,
+        Option $optionModel,
+        ManagerInterface $managerInterface
     ) {
         $this->_productModel     = $productModel;
         $this->_optionModel      = $optionModel;
         $this->_managerInterface = $managerInterface;
     }
 
-    public function aroundAddProductsByIds(\Magento\Checkout\Model\Cart $subject, callable $proceed, $productIds)
+    public function aroundAddProductsByIds(MagentoCart $subject, callable $proceed, $productIds)
     {
         if (!empty($productIds)) {
             foreach ($productIds as $key => $productId) {
-
                 $productId = (int)$productId;
                 if (!$productId) {
                     continue;
                 }
                 $product = $this->_productModel->load($productId);
 
-                if ($product->getTypeId() === \Magento\Catalog\Model\Product\Type::TYPE_BUNDLE) {
-
+                if ($product->getTypeId() === Type::TYPE_BUNDLE) {
                     $options = $this->_optionModel
                         ->getResourceCollection()
                         ->setProductIdFilter($product->getId())
@@ -41,7 +44,9 @@ class AddPlugin
                     $options->joinValues($product->getStore()->getWebsiteId());
 
                     $selections = $product->getTypeInstance()->getSelectionsCollection(
-                        $product->getTypeInstance()->getOptionsIds($product), $product);
+                        $product->getTypeInstance()->getOptionsIds($product),
+                        $product
+                    );
 
                     $params = [];
                     foreach ($selections as $sel) {
@@ -51,7 +56,7 @@ class AddPlugin
                     if ($params) {
                         try {
                             $subject->addProduct($product, $params);
-                        } catch (\Exception $e) {
+                        } catch (Exception $e) {
                             $this->_managerInterface->addError(__("We don't have as many of some products as you want."));
                         }
                     }

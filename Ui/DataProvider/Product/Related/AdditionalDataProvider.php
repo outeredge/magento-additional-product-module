@@ -2,10 +2,9 @@
 
 namespace OuterEdge\AdditionalProduct\Ui\DataProvider\Product\Related;
 
-/**
- * Class AdditionalDataProvider
- */
-class AdditionalDataProvider extends \Magento\Catalog\Ui\DataProvider\Product\Related\AbstractDataProvider
+use Magento\Catalog\Ui\DataProvider\Product\Related\AbstractDataProvider;
+
+class AdditionalDataProvider extends AbstractDataProvider
 {
     /**
      * {@inheritdoc

@@ -2,7 +2,12 @@
 
 namespace OuterEdge\AdditionalProduct\Model;
 
-class Product extends \Magento\Catalog\Model\Product {
+use Magento\Catalog\Model\Product as MagentoProduct;
+use Magento\Catalog\Model\ResourceModel\Product\Link\Product\Collection as ProductCollection;
+use Magento\Catalog\Model\ResourceModel\Product\Link\Collection as LinkCollection;
+
+class Product extends MagentoProduct
+{
 
     /**
      * Retrieve array of additional products
@@ -41,7 +46,7 @@ class Product extends \Magento\Catalog\Model\Product {
     /**
      * Retrieve collection additional product
      *
-     * @return \Magento\Catalog\Model\ResourceModel\Product\Link\Product\Collection
+     * @return ProductCollection
      */
     public function getAdditionalProductCollection()
     {
@@ -53,7 +58,7 @@ class Product extends \Magento\Catalog\Model\Product {
     /**
      * Retrieve collection additional
      *
-     * @return \Magento\Catalog\Model\ResourceModel\Product\Link\Collection
+     * @return LinkCollection
      */
     public function getAdditionallLinkCollection()
     {
@@ -64,5 +69,4 @@ class Product extends \Magento\Catalog\Model\Product {
         $collection->joinAttributes();
         return $collection;
     }
-
 }

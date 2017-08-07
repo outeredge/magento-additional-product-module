@@ -2,72 +2,78 @@
 
 namespace OuterEdge\AdditionalProduct\Block\Adminhtml\Product\Edit\Tab;
 
-use Magento\Backend\Block\Widget\Grid\Column;
 use Magento\Backend\Block\Widget\Grid\Extended;
+use Magento\Backend\Block\Template\Context;
+use Magento\Framework\Registry;
+use Magento\Catalog\Model\Product\LinkFactory;
+use Magento\Eav\Model\ResourceModel\Entity\Attribute\Set\CollectionFactory as AttributeSetCollectionFactory;
+use Magento\Catalog\Model\ProductFactory;
+use Magento\Catalog\Model\Product\Type;
+use Magento\Catalog\Model\Product\Attribute\Source\Status;
+use Magento\Catalog\Model\Product\Visibility;
+use Magento\Backend\Helper\Data as BackendHelper;
+use Magento\Backend\Block\Widget\Grid\Column;
 
 class Additional extends Extended
 {
     /**
-     * Core registry
-     *
-     * @var \Magento\Framework\Registry
+     * @var Registry
      */
     protected $_coreRegistry = null;
 
     /**
-     * @var \Magento\Catalog\Model\Product\LinkFactory
+     * @var LinkFactory
      */
     protected $_linkFactory;
 
     /**
-     * @var \Magento\Eav\Model\ResourceModel\Entity\Attribute\Set\CollectionFactory]
+     * @var AttributeSetCollectionFactory
      */
     protected $_setsFactory;
 
     /**
-     * @var \Magento\Catalog\Model\ProductFactory
+     * @var ProductFactory
      */
     protected $_productFactory;
 
     /**
-     * @var \Magento\Catalog\Model\Product\Type
+     * @var Type
      */
     protected $_type;
 
     /**
-     * @var \Magento\Catalog\Model\Product\Attribute\Source\Status
+     * @var Status
      */
     protected $_status;
 
     /**
-     * @var \Magento\Catalog\Model\Product\Visibility
+     * @var Visibility
      */
     protected $_visibility;
 
     /**
-     * @param \Magento\Backend\Block\Template\Context $context
-     * @param \Magento\Backend\Helper\Data $backendHelper
-     * @param \Magento\Catalog\Model\Product\LinkFactory $linkFactory
-     * @param \Magento\Eav\Model\ResourceModel\Entity\Attribute\Set\CollectionFactory $setsFactory
-     * @param \Magento\Catalog\Model\ProductFactory $productFactory
-     * @param \Magento\Catalog\Model\Product\Type $type
-     * @param \Magento\Catalog\Model\Product\Attribute\Source\Status $status
-     * @param \Magento\Catalog\Model\Product\Visibility $visibility
-     * @param \Magento\Framework\Registry $coreRegistry
+     * @param Context $context
+     * @param BackendHelper $backendHelper
+     * @param LinkFactory $linkFactory
+     * @param AttributeSetCollectionFactory $setsFactory
+     * @param ProductFactory $productFactory
+     * @param Type $type
+     * @param Status $status
+     * @param Visibility $visibility
+     * @param Registry $coreRegistry
      * @param array $data
-     *
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
-        \Magento\Backend\Block\Template\Context $context,
-        \Magento\Backend\Helper\Data $backendHelper,
-        \Magento\Catalog\Model\Product\LinkFactory $linkFactory,
-        \Magento\Eav\Model\ResourceModel\Entity\Attribute\Set\CollectionFactory $setsFactory,
-        \Magento\Catalog\Model\ProductFactory $productFactory,
-        \Magento\Catalog\Model\Product\Type $type,
-        \Magento\Catalog\Model\Product\Attribute\Source\Status $status,
-        \Magento\Catalog\Model\Product\Visibility $visibility,
-        \Magento\Framework\Registry $coreRegistry,
+        Context $context,
+        BackendHelper $backendHelper,
+        LinkFactory $linkFactory,
+        AttributeSetCollectionFactory $setsFactory,
+        ProductFactory $productFactory,
+        Type $type,
+        Status $status,
+        Visibility $visibility,
+        Registry $coreRegistry,
         array $data = []
     ) {
         $this->_linkFactory = $linkFactory;
@@ -143,11 +149,11 @@ class Additional extends Extended
      */
     protected function _prepareCollection()
     {
-        $collection = $this->_linkFactory->create()->useAddtionalLinks()->getProductCollection()->setProduct(
-            $this->getProduct()
-        )->addAttributeToSelect(
-            '*'
-        );
+        $collection = $this->_linkFactory->create()
+            ->useAddtionalLinks()
+            ->getProductCollection()
+            ->setProduct($this->getProduct())
+            ->addAttributeToSelect('*');
 
         if ($this->isReadonly()) {
             $productIds = $this->_getSelectedProducts();

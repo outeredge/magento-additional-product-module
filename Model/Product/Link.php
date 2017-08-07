@@ -2,7 +2,9 @@
 
 namespace OuterEdge\AdditionalProduct\Model\Product;
 
-class Link extends \Magento\Catalog\Model\Product\Link
+use Magento\Catalog\Model\Product\Link as ProductLink;
+
+class Link extends ProductLink
 {
     const LINK_TYPE_ADDITIONAL = 6;
 

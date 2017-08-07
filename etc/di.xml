@@ -19,10 +19,10 @@
         </arguments>
     </type>
     <type name="Magento\Checkout\Model\Cart">
-        <plugin name="OuterEdge_AdditionalProduct::checkoutAddPlugin" type="OuterEdge\AdditionalProduct\Model\Checkout\Cart\AddPlugin" sortOrder="1"/>
+        <plugin name="OuterEdge_AdditionalProduct::modelCartPlugin" type="OuterEdge\AdditionalProduct\Plugin\Checkout\Model\Cart"/>
     </type>
     <type name="Magento\Checkout\Controller\Cart\Add">
-        <plugin name="OuterEdge_AdditionalProduct::cartAddPlugin" type="OuterEdge\AdditionalProduct\Controller\Checkout\Cart\AddPlugin" sortOrder="1" />
+        <plugin name="OuterEdge_AdditionalProduct::cartAddPlugin" type="OuterEdge\AdditionalProduct\Plugin\Checkout\Controller\Cart\Add"/>
     </type>
 
     <type name="Magento\Catalog\Model\Product\LinkTypeProvider">

@@ -2,16 +2,19 @@
 
 namespace OuterEdge\AdditionalProduct\Model\Product\CopyConstructor;
 
-class Additional implements \Magento\Catalog\Model\Product\CopyConstructorInterface
+use Magento\Catalog\Model\Product\CopyConstructorInterface;
+use Magento\Catalog\Model\Product;
+
+class Additional implements CopyConstructorInterface
 {
     /**
      * Build product links
      *
-     * @param \Magento\Catalog\Model\Product $product
-     * @param \Magento\Catalog\Model\Product $duplicate
+     * @param Product $product
+     * @param Product $duplicate
      * @return void
      */
-    public function build(\Magento\Catalog\Model\Product $product, \Magento\Catalog\Model\Product $duplicate)
+    public function build(Product $product, Product $duplicate)
     {
         $data = [];
         $attributes = [];
@@ -23,6 +26,7 @@ class Additional implements \Magento\Catalog\Model\Product\CopyConstructorInterf
                 $attributes[] = $attribute['code'];
             }
         }
+        
         /** @var \Magento\Catalog\Model\Product\Link $link  */
         foreach ($product->getAdditionallLinkCollection() as $link) {
             $data[$link->getLinkedProductId()] = $link->toArray($attributes);

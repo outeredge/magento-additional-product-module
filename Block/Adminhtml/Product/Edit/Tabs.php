@@ -2,19 +2,9 @@
 
 namespace OuterEdge\AdditionalProduct\Block\Adminhtml\Product\Edit;
 
-use Magento\Backend\Block\Template\Context;
-use Magento\Backend\Block\Widget\Accordion;
-use Magento\Backend\Block\Widget\Tabs as WigetTabs;
-use Magento\Backend\Model\Auth\Session;
-use Magento\Catalog\Helper\Catalog;
-use Magento\Catalog\Helper\Data;
-use Magento\Eav\Model\ResourceModel\Entity\Attribute\Group\CollectionFactory;
-use Magento\Framework\Json\EncoderInterface;
-use Magento\Framework\Module\Manager;
-use Magento\Framework\Registry;
-use Magento\Framework\Translate\InlineInterface;
+use Magento\Catalog\Block\Adminhtml\Product\Edit\Tabs as ProductEditTabs;
 
-class Tabs extends \Magento\Catalog\Block\Adminhtml\Product\Edit\Tabs
+class Tabs extends ProductEditTabs
 {
     /**
      * @return $this
@@ -141,7 +131,7 @@ class Tabs extends \Magento\Catalog\Block\Adminhtml\Product\Edit\Tabs
                 ]
             );
 
-             $this->addTab(
+            $this->addTab(
                 'additional',
                 [
                     'label' => __('Additional'),
@@ -173,5 +163,4 @@ class Tabs extends \Magento\Catalog\Block\Adminhtml\Product\Edit\Tabs
 
         return parent::_prepareLayout();
     }
-
 }

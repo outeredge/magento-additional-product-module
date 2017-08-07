@@ -2,24 +2,23 @@
 
 namespace OuterEdge\AdditionalProduct\Block\Product\ProductList;
 
-class Additional extends \Magento\Catalog\Block\Product\AbstractProduct
+use Magento\Catalog\Block\Product\AbstractProduct;
+use Magento\Catalog\Model\ResourceModel\Product\Link\Product\Collection as ProductLinkCollection;
+
+class Additional extends AbstractProduct
 {
     /**
-     * Additional item collection
-     *
-     * @var \Magento\Catalog\Model\ResourceModel\Product\Link\Product\Collection
+     * @var ProductLinkCollection
      */
     protected $_itemCollection;
 
     /**
-     * Prepare Additional items data
-     *
-     * @return \Magento\Catalog\Block\Product\ProductList\Additional
+     * @return $this
      */
     protected function _prepareData()
     {
-        $product = $this->_coreRegistry->registry('product');
         /* @var $product \Magento\Catalog\Model\Product */
+        $product = $this->_coreRegistry->registry('product');
 
         $this->_itemCollection = $product->getAdditionalProductCollection()->addAttributeToSelect(
             $this->_catalogConfig->getProductAttributes()
@@ -38,7 +37,7 @@ class Additional extends \Magento\Catalog\Block\Product\AbstractProduct
      * Before rendering html process
      * Prepare items collection
      *
-     * @return \Magento\Catalog\Block\Product\ProductList\Additional
+     * @return $this
      */
     protected function _beforeToHtml()
     {
@@ -49,7 +48,7 @@ class Additional extends \Magento\Catalog\Block\Product\AbstractProduct
     /**
      * Retrieve Additional items collection
      *
-     * @return \Magento\Catalog\Model\ResourceModel\Product\Link\Product\Collection
+     * @return ProductLinkCollection
      */
     public function getItems()
     {

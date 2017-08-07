@@ -2,12 +2,14 @@
 
 namespace OuterEdge\AdditionalProduct\Controller\Adminhtml\Product\Initialization;
 
+use Magento\Catalog\Controller\Adminhtml\Product\Initialization\Helper as InitializationHelper;
 use Magento\Catalog\Api\Data\ProductLinkInterfaceFactory as ProductLinkFactory;
 use Magento\Catalog\Api\ProductRepositoryInterface\Proxy as ProductRepository;
 use Magento\Catalog\Model\Product\Link\Resolver as LinkResolver;
+use Magento\Catalog\Model\Product;
 use Magento\Framework\App\ObjectManager;
 
-class Helper extends \Magento\Catalog\Controller\Adminhtml\Product\Initialization\Helper
+class Helper extends InitializationHelper
 {
     /**
      * @var LinkResolver
@@ -21,7 +23,7 @@ class Helper extends \Magento\Catalog\Controller\Adminhtml\Product\Initializatio
      * @return \Magento\Catalog\Model\Product
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
-    protected function setProductLinks(\Magento\Catalog\Model\Product $product)
+    protected function setProductLinks(Product $product)
     {
         $links = $this->getLinkResolver()->getLinks();
 
@@ -75,8 +77,7 @@ class Helper extends \Magento\Catalog\Controller\Adminhtml\Product\Initializatio
     protected function getProductRepository()
     {
         if (null === $this->productRepository) {
-            $this->productRepository = \Magento\Framework\App\ObjectManager::getInstance()
-                ->get('Magento\Catalog\Api\ProductRepositoryInterface\Proxy');
+            $this->productRepository = ObjectManager::getInstance()->get('Magento\Catalog\Api\ProductRepositoryInterface\Proxy');
         }
         return $this->productRepository;
     }
@@ -87,10 +88,8 @@ class Helper extends \Magento\Catalog\Controller\Adminhtml\Product\Initializatio
     protected function getProductLinkFactory()
     {
         if (null === $this->productLinkFactory) {
-            $this->productLinkFactory = \Magento\Framework\App\ObjectManager::getInstance()
-                ->get('Magento\Catalog\Api\Data\ProductLinkInterfaceFactory');
+            $this->productLinkFactory = ObjectManager::getInstance()->get('Magento\Catalog\Api\Data\ProductLinkInterfaceFactory');
         }
         return $this->productLinkFactory;
     }
-
 }

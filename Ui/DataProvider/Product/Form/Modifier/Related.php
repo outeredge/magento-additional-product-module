@@ -1,9 +1,11 @@
 <?php
+
 namespace OuterEdge\AdditionalProduct\Ui\DataProvider\Product\Form\Modifier;
 
+use Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\Related as ModifierRelated;
 use Magento\Ui\Component\Form\Fieldset;
 
-class Related extends \Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\Related
+class Related extends ModifierRelated
 {
     const DATA_SCOPE_ADDITIONAL = 'additional';
 
